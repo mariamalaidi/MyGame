@@ -64,14 +64,14 @@ public class GamePanel extends JPanel implements Runnable{
             int updateCount = 0;
             while (((now - lastUpdateTime) > TIME_BEFORE_UPDATE) && (updateCount < MOST_UPDATE_BEFORE_RENDER)) {
                 update();
-                input(mouseHandler, keyHandler);
+                input();
                 lastUpdateTime += TIME_BEFORE_UPDATE;
                 updateCount++;
             }
             if ((now - lastUpdateTime) > TIME_BEFORE_UPDATE) {
                 lastUpdateTime = now - TIME_BEFORE_UPDATE;
             }
-            input(mouseHandler, keyHandler);
+            input();
             render();
             lastRendered = now;
             frameCount++;
@@ -100,19 +100,15 @@ public class GamePanel extends JPanel implements Runnable{
 
     }
 
-    public void input(MouseHandler mouseHandler, KeyHandler keyHandler){
-        gameStateManger.input(mouseHandler, keyHandler);
-    }
+    public void input(){
 
-    public void update(){
-        gameStateManger.update();
     }
+    public void update(){}
 
     public void render(){
         if(graphics2D != null){
             graphics2D.setColor(new Color(66, 134,244));
             graphics2D.fillRect(0,0,width,height);
-            gameStateManger.render(graphics2D);
         }
     }
 
